@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  template-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: template-service
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
+    # depends_on:
+    #   - other-service   # scommenta se hai dipendenze
+    restart: unless-stopped
