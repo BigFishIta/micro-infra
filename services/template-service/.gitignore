@@ -1,9 +1,11 @@
 # compiled output
 /dist
-/node_modules
 /build
 
-# Logs
+# production deps
+/node_modules
+
+# logs
 logs
 *.log
 npm-debug.log*
@@ -15,7 +17,7 @@ lerna-debug.log*
 # OS
 .DS_Store
 
-# Tests
+# tests output
 /coverage
 /.nyc_output
 
@@ -28,29 +30,33 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
+# VSCode settings folder, ma traccia i JSON di configurazione
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+# dotenv files (il template-traccia .env.example, ma non .env locali)
+.env*
+!.env.example
 
 # temp directory
 .temp
 .tmp
 
-# Runtime data
+# runtime data
 pids
 *.pid
 *.seed
 *.pid.lock
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
+# Diagnostic reports
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Docker
+Dockerfile
+.dockerignore
+
+# README, documenti, swagger ecc.
+!README.md
