@@ -112,3 +112,11 @@ docker-compose up -d
 ```
 
 Il template verrà ricostruito ogni volta in base alle modifiche nel codice, senza dover fare manualmente `docker build`.
+
+🪵 Log JSON
+Se usi `nestjs-pino`, i log saranno in JSON sullo stdout del container.
+Puoi vederli con:
+
+```powershell
+docker logs -f template-service
+

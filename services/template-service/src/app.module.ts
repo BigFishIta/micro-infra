@@ -1,23 +1,24 @@
-// src/app.module.ts
+// services/template-service/src/app.module.ts
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { ConfigModule } from '@nestjs/config';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
-// 1️⃣ importa LoggerModule da nestjs-pino
 import { LoggerModule } from 'nestjs-pino';
+import { PingController } from './ping.controller';
+import { TerminusModule } from '@nestjs/terminus';
+import { HealthController }     from './health/health.controller';
+
+// ← qui il solo alias + cartella “email”
+import { EmailModule } from '@common/email/email.module';
+import { TestEmailController } from './test-email.controller';
 
 @Module({
   imports: [
+    EmailModule,
+    TerminusModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     PrometheusModule.register({ path: '/metrics', defaultMetrics: { enabled: true } }),
-    // 2️⃣ registra LoggerModule per avere un logger JSON su stdout
-    LoggerModule.forRoot({
-      pinoHttp: {
-        level: 'info',
-        // ometti prettifier per avere JSON puro
-        transport: undefined,
-      },
-    }),
+    LoggerModule.forRoot({ pinoHttp: { level: 'info' } }),
   ],
-  controllers: [AppController],
-  providers: [],
+  controllers: [TestEmailController, HealthController, PingController],
 })
 export class AppModule {}
